@@ -7,7 +7,7 @@ services:
             - '9000:9000'
         volumes:
         - '/var/run/docker.sock:/var/run/docker.sock'
-        - /home/pi/docker/portainer:/data
+        - /home/pi1/docker/portainer:/data
         image: 'portainer/portainer:linux-arm'
 
     watchtower:
