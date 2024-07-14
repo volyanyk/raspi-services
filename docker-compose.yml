@@ -45,6 +45,7 @@ services:
     restart: unless-stopped
   homebridge:
     image: homebridge/homebridge:latest
+    container_name: hb
     restart: always
     volumes:
       - '/docker/homebridge:/homebridge'
