@@ -38,8 +38,6 @@ services:
     restart: always
     volumes:
       - '/docker/homebridge:/homebridge'
-    ports:
-      - '80:9001'
     logging:
       driver: json-file
       options:
