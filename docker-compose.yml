@@ -35,9 +35,9 @@ services:
      image: b4bz/homer
      container_name: homer
      volumes:
-       - ./assets/:/www/assets
+       - './docker/homer/assets/:/www/assets'
      ports:
-       - 89:8080
+       - '89:8080'
      environment:
        - UID=1000
        - GID=1000
