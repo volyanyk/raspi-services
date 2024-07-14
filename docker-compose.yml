@@ -47,6 +47,7 @@ services:
     image: homebridge/homebridge:latest
     container_name: hb
     restart: always
+    network_mode: host
     volumes:
       - '/docker/homebridge:/homebridge'
     logging:
