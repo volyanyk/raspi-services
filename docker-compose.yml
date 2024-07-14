@@ -1,38 +1,46 @@
 version: '3.3'
 services:
-    portainer:
-        container_name: portainer
-        restart: unless-stopped
-        ports:
-            - '9000:9000'
-        volumes:
-        - '/var/run/docker.sock:/var/run/docker.sock'
-        - /home/pi1/docker/portainer:/data
-        image: 'portainer/portainer:linux-arm'
-
-    watchtower:
-        container_name: watchtower
-        restart: unless-stopped
-        volumes:
-        - /var/run/docker.sock:/var/run/docker.sock
-        image: containrrr/watchtower
-
-    adguardhome:
-        container_name: adguardhome
-        image: adguard/adguardhome:latest
-        restart: always
-        volumes:
-        - /docker/adguard/workdir:/opt/adguardhome/work
-        - /docker/adguard/confdir:/opt/adguardhome/conf
-        # Uncomment when you want to setup a DHCP server as well
-        network_mode: "host"
-        ports:
-        - "53:53/tcp"
-        - "53:53/udp"
-        - "67:67/udp"
-        - "68:68/tcp"
-        - "68:68/udp"
-        - "80:80/tcp"
-        - "443:443/tcp"
-        - "853:853/tcp"
-        - "3000:3000/tcp"
+  portainer:
+    container_name: portainer
+    restart: unless-stopped
+    ports:
+      - '9000:9000'
+    volumes:
+      - '/var/run/docker.sock:/var/run/docker.sock'
+      - '/home/pi1/docker/portainer:/data'
+    image: 'portainer/portainer:linux-arm'
+  watchtower:
+    container_name: watchtower
+    restart: unless-stopped
+    volumes:
+      - '/var/run/docker.sock:/var/run/docker.sock'
+    image: containrrr/watchtower
+  adguardhome:
+    container_name: adguardhome
+    image: 'adguard/adguardhome:latest'
+    restart: always
+    volumes:
+      - '/docker/adguard/workdir:/opt/adguardhome/work'
+      - '/docker/adguard/confdir:/opt/adguardhome/conf'
+    network_mode: host
+    ports:
+      - '53:53/tcp'
+      - '53:53/udp'
+      - '67:67/udp'
+      - '68:68/tcp'
+      - '68:68/udp'
+      - '80:80/tcp'
+      - '443:443/tcp'
+      - '853:853/tcp'
+      - '3000:3000/tcp'
+  homebridge:
+    image: 'homebridge/homebridge:latest'
+    restart: always
+    network_mode: host
+    volumes:
+      - './volumes/homebridge:/homebridge'
+    logging: null
+    driver: json-file
+    options:
+      max-size: 10mb
+      max-file: '1'
