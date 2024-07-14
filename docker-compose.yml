@@ -31,11 +31,15 @@ services:
       - '443:443/tcp'
       - '853:853/tcp'
       - '3000:3000/tcp'
-  homer:
-     image: b4bz/homer
-     container_name: homer
-     volumes:
-       - '/docker/homer/assets/:/www/assets'
-     ports:
-       - '89:8080'
-     restart: unless-stopped
+  heimdall:
+    image: lscr.io/linuxserver/heimdall:latest
+    container_name: heimdall
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
+    volumes:
+      - /docker/heimdall/config:/config
+    ports:
+      - 8080:80
+    restart: unless-stopped
