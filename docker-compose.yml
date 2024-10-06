@@ -55,4 +55,10 @@ services:
       options:
         max-size: "10mb"
         max-file: "1"
+  it-tools:
+    image: 'corentinth/it-tools:latest'  # The Docker image to use.
+    ports:
+      - '8000:80'
+    restart: unless-stopped
+    container_name: it-tools
 
